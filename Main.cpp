@@ -71,7 +71,7 @@ int GameInfo::GetProcID() {
 			sprintf(proc_name_conversion, "%ws", process_struct.szExeFile);
 
 			// checking process name
-			if (strcmp(this->ProcessName, output) == 0) {
+			if (strcmp(this->ProcessName, proc_name_conversion) == 0) {
 				this->ProcessID = process_struct.th32ProcessID;
 				break;
 			}
