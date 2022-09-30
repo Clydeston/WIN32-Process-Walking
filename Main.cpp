@@ -3,6 +3,9 @@
 
 void GameInfo::GetProcessInfo() {
 	GetProcID();
+	if (this->ProcessID) {
+		GetHandleToProcess();
+	}
 }
 
 uintptr_t GameInfo::GetModuleBaseAddress(char* mod_name) {
@@ -63,7 +66,6 @@ int GameInfo::GetProcID() {
 			return 0;
 		// iterating through processes
 		do {
-			HANDLE hProc;
 			//_tprintf(TEXT("\nPROCESS NAME:  %s"), process_struct.szExeFile);
 
 			// wchar_t to char type conversion
@@ -82,4 +84,16 @@ int GameInfo::GetProcID() {
 		return proc_id;
 
 	}
+}
+
+HANDLE GameInfo::GetHandleToProcess() {
+	return OpenProcess(PROCESS_ALL_ACCESS, NULL, this->ProcessID);
+}
+
+void GameInfo::Write(PBYTE addr, PBYTE val, PBYTE size = nullptr) {
+	WriteProcessMemory(this->hProc, addr, &val, size != nullptr ? sizeof(size) : sizeof(addr), nullptr);
+}
+
+void GameInfo::Read(PBYTE addr, PBYTE val, PBYTE size = nullptr) {
+	ReadProcessMemory(this->hProc, addr, &val, size != nullptr ? sizeof(size) : sizeof(addr), nullptr);
 }
