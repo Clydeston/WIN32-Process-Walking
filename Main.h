@@ -9,8 +9,6 @@ class GameInfo {
 public:
 	HANDLE hProc;
 	void GetProcessInfo();
-	void Write(PBYTE addr, PBYTE val, PBYTE size = nullptr);
-	void Read(PBYTE addr, PBYTE val, PBYTE size = nullptr);
 	char* ProcessName;
 	int ProcessID;
 	uintptr_t GetModuleBaseAddress(char* mod_name);
