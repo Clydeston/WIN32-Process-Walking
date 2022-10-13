@@ -87,13 +87,5 @@ int GameInfo::GetProcID() {
 }
 
 HANDLE GameInfo::GetHandleToProcess() {
-	return OpenProcess(PROCESS_ALL_ACCESS, NULL, this->ProcessID);
-}
-
-void GameInfo::Write(PBYTE addr, PBYTE val, PBYTE size = nullptr) {
-	WriteProcessMemory(this->hProc, addr, &val, size != nullptr ? sizeof(size) : sizeof(addr), nullptr);
-}
-
-void GameInfo::Read(PBYTE addr, PBYTE val, PBYTE size = nullptr) {
-	ReadProcessMemory(this->hProc, addr, &val, size != nullptr ? sizeof(size) : sizeof(addr), nullptr);
+	return this->hProc = OpenProcess(PROCESS_ALL_ACCESS, NULL, this->ProcessID);
 }
