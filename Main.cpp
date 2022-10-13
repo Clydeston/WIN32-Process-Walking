@@ -19,7 +19,7 @@ uintptr_t GameInfo::GetModuleBaseAddress(char* mod_name) {
 		MODULEENTRY32 module_struct;
 
 		// size of structure to be set to avoid issues
-		module_struct.dwSize = sizeof(PROCESSENTRY32);
+		module_struct.dwSize = sizeof(MODULEENTRY32);
 
 		// valid first module check
 		if (!Module32First(hSnapshot, &module_struct))
